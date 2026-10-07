@@ -10,10 +10,9 @@ It is a static page. Serve the folder from any web server (GitHub Pages works); 
 |---|---|
 | `index.html` | The page, its styles and its scripts |
 | `data/cards.json` | One record per site: the site, its nearest coffee shop, the walking route, distance and time, plus the streets, parks, water and cemeteries clipped to that site's small map |
-| `data/walks.json` | Sites, coffee shops and walking routes for the overview map (GeoJSON) |
-| `data/basemap.json` | Streets, parks, water and cemeteries for the overview map (GeoJSON) |
+| `data/walks.json` | Sites, coffee shops, walking routes and the Chicago city limits for the overview map (GeoJSON) |
 
-The basemap ships with the page as GeoJSON, so it needs no tile service and no API key.
+The overview map's basemap is [OpenFreeMap](https://openfreemap.org) vector tiles, which need no API key. The small maps draw their own streets, parks, water and cemeteries from `data/cards.json`.
 
 ## Method
 
@@ -25,6 +24,7 @@ The basemap ships with the page as GeoJSON, so it needs no tile service and no A
 ## Credits and licenses
 
 - Routes and cemetery outlines: © OpenStreetMap contributors, [ODbL](https://www.openstreetmap.org/copyright)
-- Street centerlines, park boundaries and hydrography: City of Chicago and Chicago Park District open data
+- Overview basemap: OpenFreeMap, © OpenMapTiles, data © OpenStreetMap contributors
+- Street centerlines, park boundaries, hydrography and city limits: City of Chicago and Chicago Park District open data
 - Coffee icon: [Font Awesome Free](https://fontawesome.com/license/free) "mug-hot", CC BY 4.0
 - Map library: [MapLibre GL JS](https://maplibre.org/) 5.6.0, BSD-3-Clause
