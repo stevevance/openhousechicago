@@ -377,6 +377,24 @@ function drawOverview(B, W) {
       ? "Walking routes: R5 on OpenStreetMap · City limits: City of Chicago"
       : "Streets, parks, water, city limits: City of Chicago · Routes and cemeteries: © OpenStreetMap contributors" }));
 
+  /*
+   * Keep the attribution collapsed to its ⓘ button. MapLibre expands the compact
+   * box when the map loads and again when the style or size changes, so collapse
+   * it after each of those, unless the viewer has opened it with the button.
+   */
+  let attribOpen = false;
+  const attribBox = () => document.querySelector("#overview .maplibregl-ctrl-attrib");
+  const collapseAttrib = () => {
+    const box = attribBox();
+    if (!box || attribOpen) return;
+    box.classList.remove("maplibregl-compact-show");
+    box.removeAttribute("open");
+  };
+  ["load", "styledata", "resize"].forEach(ev => map.on(ev, collapseAttrib));
+  document.getElementById("overview").addEventListener("click", e => {
+    if (e.target.closest(".maplibregl-ctrl-attrib-button")) setTimeout(() => { attribOpen = attribBox().classList.contains("maplibregl-compact-show"); });
+  });
+
   // Repaint with the other theme's colors when the viewer's theme changes
   const restyle = () => map.setStyle(baseStyle());
   window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", restyle);
