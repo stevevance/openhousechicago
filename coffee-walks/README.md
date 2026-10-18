@@ -17,7 +17,7 @@ The overview map's basemap is [OpenFreeMap](https://openfreemap.org) vector tile
 ## Method
 
 - **Sites**: Open House Chicago's "New Sites for 2026" list. Nine of OHC's map pins were about a block from the street address, so those sites were re-geocoded from their addresses.
-- **Coffee shops**: [South Side Coffee Shops](https://www.google.com/maps/d/viewer?mid=18b9uhyH_1C6SRk4byD2WnPSrN5UW6BJH) by Soren Spicknall, which covers Chicago south of Roosevelt Road, plus Unison Coffee (148 S. California Ave.), which soft-opened in April 2026 and isn't on that map yet.
+- **Coffee shops**: [South Side Coffee Shops](https://www.google.com/maps/d/viewer?mid=18b9uhyH_1C6SRk4byD2WnPSrN5UW6BJH) by Soren Spicknall, which covers Chicago south of Roosevelt Road, plus Unison Coffee (148 S. California Ave.), which soft-opened in April 2026 and isn't on that map yet, and Forum Cafe (318 E. 43rd St.), next door to the Forum in Bronzeville, which isn't on it either. Forum Cafe isn't the closest shop to any new site, so it appears only on the overview map.
 - **Which sites**: those within 1.5 miles, in a straight line, of a coffee shop.
 - **Routes**: Conveyal R5 (via r5py), walking on an August 2026 OpenStreetMap extract at 3.5 mph. Each site was routed to its three closest shops, and the quickest walk was kept.
 
