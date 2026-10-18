@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Walking routes from the 12 sites new to Open House Chicago 2026 to the nearest South Side coffee shop, from 3 to 26 minutes on foot.">
+<meta name="description" content="Walking routes from the 12 sites new to Open House Chicago 2026 to the nearest South Side coffee shop, from 3 to 29 minutes on foot.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://stevevance.github.io/openhousechicago/coffee-walks/">
 <meta property="og:title" content="Open House Chicago 2026: new sites near South Side coffee">
-<meta property="og:description" content="Walking routes from the 12 sites new to Open House Chicago 2026 to the nearest South Side coffee shop, from 3 to 26 minutes on foot.">
+<meta property="og:description" content="Walking routes from the 12 sites new to Open House Chicago 2026 to the nearest South Side coffee shop, from 3 to 29 minutes on foot.">
 <meta property="og:image" content="https://stevevance.github.io/openhousechicago/coffee-walks/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -125,7 +125,7 @@ a:focus-visible{outline:2px solid var(--site);outline-offset:2px}
   <footer>
     <p>Sites: Open House Chicago's "New Sites for 2026" list (openhousechicago.org). Coffee shops: Soren Spicknall's <a href="https://www.google.com/maps/d/viewer?mid=18b9uhyH_1C6SRk4byD2WnPSrN5UW6BJH" style="color:inherit">South Side Coffee Shops</a> map, which covers city limits south of Roosevelt Road.</p>
     <p>Routes, distances and times: Conveyal R5 (via r5py) walking on an August 2026 OpenStreetMap extract at 3.5 mph, choosing the quickest walk among each site's three closest shops. Streets, parks and water: City of Chicago street centerlines, Chicago Park District boundaries (2018), City hydrography and OpenStreetMap cemeteries. The other 6 new sites are more than 1.5 miles from any shop on the map. Because the map covers only the South Side, sites farther north are matched to the nearest South Side shop, not the nearest coffee overall.</p>
-    <p>Corrections: Open House Chicago's map pins for nine of these sites were about a block off, so they were re-geocoded from their street addresses. Unison Coffee (148 S. California Ave.), which soft-opened in April 2026 according to Block Club Chicago, is added here because it isn't on Soren's map yet. So is Forum Cafe (318 E. 43rd St.), next door to the Forum in Bronzeville; it's on the overview map but isn't the closest shop to any new site.</p>
+    <p>Corrections: Open House Chicago's map pins for nine of these sites were about a block off, so they were re-geocoded from their street addresses. Unison Coffee (148 S. California Ave.), which soft-opened in April 2026 according to Block Club Chicago, is added here because it isn't on Soren's map yet. So is Forum Cafe (318 E. 43rd St.), next door to the Forum in Bronzeville; it's on the overview map, with the regular coffee icon, but isn't the closest shop to any new site. Sip &amp; Savor's South Loop shop (31 E. Roosevelt Rd.), which is on Soren's map, closed in early 2026 according to Block Club Chicago, so it's left out.</p>
   </footer>
 </div>
 
@@ -297,7 +297,7 @@ DATA.forEach(p => {
   const stat = p.inside
     ? `<span class="big">0<small>min</small></span><span class="sub">The café is inside<br>the building</span>`
     : `<span class="big">${p.walk_min}<small>min</small></span><span class="sub">${p.walk_mi.toFixed(2)} mi walk<br>${p.crow_mi.toFixed(2)} mi straight line</span>`;
-  const note = p.not_on_map ? '<span class="meta">Not on Soren\'s map (soft-opened April 2026)</span>' : (p.coffee_cat === "University-Affiliated" ? '<span class="meta">University-affiliated</span>' : "");
+  const note = `<span class="meta">${esc(p.coffee_addr)}</span>` + (p.not_on_map ? '<span class="meta">Not on Soren\'s map (soft-opened April 2026)</span>' : (p.coffee_cat === "University-Affiliated" ? '<span class="meta">University-affiliated</span>' : ""));
   const body = document.createElement("div");
   body.className = "body";
   body.innerHTML = `
@@ -418,7 +418,7 @@ function drawOverview(B, W) {
     el.className = "ov-cafe" + (f.properties.not_on_map ? " off" : "");
     el.innerHTML = `<svg viewBox="0 0 512 512" aria-hidden="true"><path d="${MUG}"/></svg>`;
     el.setAttribute("aria-label", f.properties.name);
-    const pop = `<b>${esc(f.properties.name)}</b>${f.properties.not_on_map ? "Not on Soren's map" : "On Soren's South Side Coffee Shops map"}`;
+    const pop = `<b>${esc(f.properties.name)}</b>${esc(f.properties.address)}<br>${f.properties.note || (f.properties.not_on_map ? "Not on Soren's map" : "On Soren's South Side Coffee Shops map")}`;
     // Shift a café that shares its building with a site so both markers show
     const shared = W.sites.features.some(s => s.geometry.coordinates.join() === f.geometry.coordinates.join());
     new maplibregl.Marker({ element: el, offset: shared ? [20, 0] : [0, 0] })
